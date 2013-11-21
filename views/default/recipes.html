@@ -5,6 +5,8 @@
 </head>
 
 <h1>All Recipes</h1>
+{{=grid}}
+{{pass}}
 
 <h2>
     Page Content:
@@ -17,6 +19,14 @@
 </body>
 <p>
     {{=A('Back', _href=URL('default', 'index'))}}
+</p>
+
+<p>
+	{{=A('Create Recipe', _href=URL('default', 'addRecipe'))}}
+</p>
+
+<p>
+	{{=A('View Your Recipe', _href=URL('default', 'viewRecipe'))}}
 </p>
 
 <center>

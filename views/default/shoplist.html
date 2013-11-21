@@ -11,19 +11,13 @@
 </h2>
 
 <body id="shoplist">
-    1) A button that says 'Create' in order to add a new shopping list to the signed in user's list.
 </body>
 <p>{{=A('Create A New Shopping List', _href=URL('default', 'buildshoplist'))}}</p>
-<h2>
-</h2>
-<body>
-   2) A list of all shopping lists that the signed in user has created on to this site. Each shopping list is followed by a link that redirects to a page. The page shares a list of all ingredients that are required for each selected recipe.
-</body>
 
 <p>
     {{=A('Back', _href=URL('default', 'index'))}}
 </p>
-
+{{=grid}}
 <center>
 	{{=A('Home', _href=URL('default', 'index'))}}
 	&nbsp&nbsp&nbsp&nbsp
