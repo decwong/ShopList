@@ -81,25 +81,3 @@ use_janrain(auth, filename='private/janrain.key')
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
-
-"""ALL USER DATABASES FOR SHOPLIST BELONG HERE"""
-
-def get_email():
-    if auth.user:
-        return auth.user.email
-    else:
-        return 'None'
-    
-"""User data - Clone from auth_user"""
-db.define_table('users',
-    Field('first_name'),
-    Field('last_name'),
-    Field('email'),
-    Field('username', unique=True),
-    Field('password'),
-    Field('sList'))
-
-db.users.username.requires = IS_IN_DB(db, db.auth_user.username)
-db.users.first_name.requires = IS_IN_DB(db, db.auth_user.first_name)
-db.users.last_name.requires = IS_IN_DB(db, db.auth_user.last_name)
-db.users.email.requires = [IS_EMAIL(), IS_IN_DB(db, db.auth_user.email)]

@@ -6,19 +6,20 @@
 </head>
 
 <h1>
-    Support Page
+    Support
 </h1>
 
+<br>
 <body id="support">
-    This page will be used for users to contact us with suggestions or complaints.
-</body>
+	<center>
+	{{=form}}
+	</center>
 
-
-<p>
+   <br>
    {{=A('Back', _href=URL('default', 'index'))}} 
-</p>
-
-<center>
+   <br>
+   <br>
+   
 	{{=A('Home', _href=URL('default', 'index'))}}
 	&nbsp&nbsp&nbsp&nbsp
 	{{=A('Ingredients', _href=URL('default', 'ingredients'))}}
@@ -28,5 +29,5 @@
 	{{=A('ShopList', _href=URL('default', 'shoplist'))}}
 	&nbsp&nbsp&nbsp&nbsp
 	{{=A('Support', _href=URL('default', 'support'))}}
-</center>
+</body>
 </html>

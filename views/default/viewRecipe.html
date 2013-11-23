@@ -4,7 +4,21 @@
 	<link rel="stylesheet" href="{{=URL('static','css/style.css')}}">
 </head>
 
-{{=grid}}
-{{pass}}
-
+<body id="recipes">
+	{{=grid}}
+	{{pass}}
+	
+	<br><br>
+	
+	{{=A('Home', _href=URL('default', 'index'))}}
+	&nbsp&nbsp&nbsp&nbsp
+	{{=A('Ingredients', _href=URL('default', 'ingredients'))}}
+	&nbsp&nbsp&nbsp&nbsp
+	{{=A('Recipes', _href=URL('default', 'recipes'))}}
+	&nbsp&nbsp&nbsp&nbsp
+	{{=A('ShopList', _href=URL('default', 'shoplist'))}}
+	&nbsp&nbsp&nbsp&nbsp
+	{{=A('Support', _href=URL('default', 'support'))}}
+	
+</body>
 </html>

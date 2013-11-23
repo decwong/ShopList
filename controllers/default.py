@@ -14,72 +14,102 @@ def index():
 	create_shoplist()
 	return dict()
 
-@auth.requires_login()
 def addRecipe():
-	form = SQLFORM(db.recipe)
-	if form.process().accepted:
-		response.flash = 'recipe created'
-		redirect (URL('recipes'))
-	return dict(form=form)
+	if auth.user == None:
+		redirect (URL('index'))
+	else:
+		form = SQLFORM(db.recipe)
+		if form.process().accepted:
+			response.flash = 'recipe created'
+			redirect (URL('recipes'))
+		return dict(form=form)
 	
-@auth.requires_login()
 def create_shoplist():
 	check = db(db.ShopList.author == auth.user_id).select().first()
-	if check is None:
+	if check:
+		current_user = db(db.ShopList.author.contains(auth.user_id))
+	else:
 		response.flash = 'no shopping list, creating for user'
 		success = db.ShopList.insert(author=auth.user_id)
-	else:
-		response.flash = 'shopping list exists for user'
-	current_user = db(db.ShopList.author.contains(auth.user_id))
-	##db.ShopList.insert()
-
-@auth.requires_login()
+	##db.ShopList.insert()"""
+	
 def viewRecipe():
-	q = db.recipe.Author == auth.user_id
-	grid = SQLFORM.grid(q)
-	return dict(grid=grid)
+	if auth.user == None:
+		redirect (URL('index'))
+	else:
+		q = db.recipe.Author == auth.user_id
+		grid = SQLFORM.grid(q, csv=False)
+		grid.element('.web2py_counter', replace=None)
+		return dict(grid=grid)
 		
-@auth.requires_login()
 def recipes():
-	if request.args(0) != None:
-		check = db(db.recipe.id == request.args(0)).select().first()
-		query = db(db.ShopList.author == auth.user_id).select().first()
-		if check != None:
-			query.cart = query.cart + check.ingredients
-			query.cart = list(set(query.cart))
-			response.flash = query.cart
-			query.update_record()
-	q = db.recipe.public == True
-	grid = SQLFORM.grid(q, searchable=True, fields=[db.recipe.title, db.recipe.email], create=False, user_signature=False, editable=False, deletable=False,
-	csv=False,
-	links=[dict(header=T('Add to Cart'),
-	body=lambda r: A('Add', _class='btn',
-	_href=URL('default', 'recipes', args=[r.id])))])
-	return dict(grid=grid)
+	if auth.user == None:
+		redirect (URL('index'))
+	else:
+		if request.args(0) != None:
+			check = db(db.recipe.id == request.args(0)).select().first()
+			query = db(db.ShopList.author == auth.user_id).select().first()
+			if check != None:
+				query.cart = query.cart + check.ingredients
+				query.cart = list(set(query.cart))
+				response.flash = query.cart
+				query.update_record()
+		q = db.recipe.publics == True
+		grid = SQLFORM.grid(q, searchable=True, fields=[db.recipe.title, db.recipe.email], create=False, user_signature=False, editable=False, deletable=False,
+		csv=False,
+		links=[dict(header=T('Add to Cart'),
+		body=lambda r: A('Add', _class='btn',
+		_href=URL('default', 'recipes', args=[r.id])))])
+		grid.element('.web2py_counter', replace=None)
+		return dict(grid=grid)
 
 def add_to_list():
-	return dict()
+	if auth.user == None:
+		redirect (URL('index'))
+		return dict()
+
 def addIngredients():
-    return dict()
+	if auth.user == None:
+		redirect (URL('index'))
+    	return dict()
 
 def ingredients():
-    return dict()
+	if auth.user == None:
+		redirect (URL('index'))
+	else:
+		if request.args(0) != None:
+			check = db(db.ingredients.id == request.args(0)).select().first()
+			query = db(db.ShopList.author == auth.user_id).select().first()
+			if check != None:
+				query.cart = query.cart + check.ingredients
+				query.cart = list(set(query.cart))
+				response.flash = query.cart
+				query.update_record()
+		grid = SQLFORM.grid(db.ingredients, searchable=True, fields=[db.ingredients.ingredient], create=False, details=False, user_signature=False, editable=False, deletable=False,
+		csv=False,
+		links=[dict(header=T('Add to Cart'),
+		body=lambda r: A('Add', _class='btn',
+		_href=URL('default', 'ingredients', args=[r.id])))])
+		grid.element('.web2py_counter', replace=None)
+		return dict(grid=grid)
 
-@auth.requires_login()
 def shoplist():
-	q = db.ShopList.author == auth.user_id
-	q2 = db(q).select().first()
-	response.flash = q2.cart
-	grid = SQLFORM.factory(
-		Field('ingredient_list', 'list:string', default = q2.cart))
+	if auth.user == None:
+		redirect (URL('index'))
+	else:
+		q = db.ShopList.author == auth.user_id
+		q2 = db(q).select().first()
+		#response.flash = q2.cart
+		grid = SQLFORM.factory(
+			Field('ingredient_list', 'list:string', default = q2.cart))
 	
-	
-	##grid = SQLFORM.grid(q, searchable=True, fields=[db.ShopList.cart], create=False, user_signature=False, editable=False, deletable=False,
-	##	csv=False)
-	return dict(grid=grid)
+		##grid = SQLFORM.grid(q, searchable=True, fields=[db.ShopList.cart], create=False, user_signature=False, editable=False, deletable=False,
+		##	csv=False)
+		return dict(grid=grid)
 
 def support():
-    return dict()
+    form = SQLFORM(db.Support)
+    return dict(form=form)
 
 def user():
     return dict(form=auth())

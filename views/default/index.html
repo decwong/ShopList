@@ -1,10 +1,9 @@
 {{extend 'layout.html'}}
 <html>
 <head>
-	<link rel="stylesheet" href="{{=URL('static','css/style.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{=URL('static','css/style.css')}}">
 </head>
 <body id="index">
-	<center>
 	
 	<!--Index Pseudo-Code:
 	 
@@ -17,7 +16,6 @@
 	  --!>
 		 	
 	{{if auth.user:}}
-	
 		<a href="{{=URL('default', 'ingredients')}}"><img width="200px" src="{{=URL('../../static/images/ing.png')}}"/>
 		<a href="{{=URL('default', 'recipes')}}"><img width="200px" src="{{=URL('../../static/images/rp.png')}}"/>
 		<br>
@@ -25,7 +23,7 @@
 		<a href="{{=URL('default', 'support')}}"><img width="200px" src="{{=URL('../../static/images/support.png')}}"/>
 		
 	{{else:}}
-		<!-- Custom login form: https://groups.google.com/forum/#!topic/web2py/DyspJUl_IMM --!>
+		<!-- Custom login form: https://groups.google.com/forum/#!topic/web2py/DyspJUl_IMM --!>		
 		{{form=auth.login()}}
 		{{=form.custom.begin}}
 			Username:
@@ -34,6 +32,7 @@
 			Password:
 			{{=form.custom.widget.password}}
 		<br>
+			
 			{{=form.custom.submit}}
 		
 		<!-- indention junk for Login button -->
@@ -48,7 +47,6 @@
 				&nbsp&nbsp&nbsp
 		<!-- Leave this here until someone figures out how to use a for loop 
 		     in html without javascript --!>
-		     
 		{{=form.custom.end}}
 		{{pass}}
 		
@@ -69,6 +67,5 @@
 		{{=A('Support', _href=URL('default', 'support'))}} 
 		
 	{{pass}}
-	</center>
 </body>
 </html>

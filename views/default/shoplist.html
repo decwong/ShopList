@@ -3,22 +3,18 @@
 <head>
 	<link rel="stylesheet" href="{{=URL('static','css/style.css')}}">
 </head>
-
-<h1>Shopping List</h1>
-
-<h2>
-    Page Content:
-</h2>
-
 <body id="shoplist">
-</body>
-<p>{{=A('Create A New Shopping List', _href=URL('default', 'buildshoplist'))}}</p>
+<h1>Your ShopList</h1>
 
-<p>
-    {{=A('Back', _href=URL('default', 'index'))}}
-</p>
-{{=grid}}
-<center>
+{{=A('Create New List', _href=URL('default', 'buildshoplist'))}}
+<br>
+{{=A('Back', _href=URL('default', 'index'))}}
+<br>
+
+	<center>
+		{{=grid}}
+	</center>
+
 	{{=A('Home', _href=URL('default', 'index'))}}
 	&nbsp&nbsp&nbsp&nbsp
 	{{=A('Ingredients', _href=URL('default', 'ingredients'))}}
@@ -28,4 +24,6 @@
 	{{=A('ShopList', _href=URL('default', 'shoplist'))}}
 	&nbsp&nbsp&nbsp&nbsp
 	{{=A('Support', _href=URL('default', 'support'))}}
-</center>
+
+</body>
+</html>

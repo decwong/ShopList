@@ -9,6 +9,7 @@ body#index
 	background-image: url('../images/background.png');
 	background-repeat:repeat;
 	color: #FFFFFF;
+	text-align: center;
 	align: center;
 	overflow: auto;
 }
@@ -19,6 +20,7 @@ body#support
 	background-color: #1e1c19;
 	background-repeat:repeat;
 	color: #FFFFFF;
+	text-align: center;
 	align: center;
 	overflow: auto;
 }
@@ -29,6 +31,7 @@ body#ingredients
 	background-color: #692917;
 	background-repeat:repeat;
 	color: #FFFFFF;
+	text-align: center;
 	align: center;
 	overflow: auto;
 }
@@ -39,6 +42,7 @@ body#recipes
 	background-color: #2d3632;
 	background-repeat:repeat;
 	color: #FFFFFF;
+	text-align: center;
 	align: center;
 	overflow: auto;
 }
@@ -49,6 +53,7 @@ body#shoplist
 	background-color: #676056;
 	background-repeat:repeat;
 	color: #FFFFFF;
+	text-align: center;
 	align: center;
 	overflow: auto;
 }
